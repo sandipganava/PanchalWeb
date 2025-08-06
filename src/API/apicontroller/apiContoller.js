@@ -162,7 +162,18 @@ function constructFamilyTree(person, childData) {
 }
 
 
-
+apicontroller.updateAll = async (req, res) => {
+    try {
+       await news.collection.updateMany(
+            { deleted_at: "null" }, // string "null"
+            { $set: { deleted_at: null } } // real null
+        );
+        res.status(200).json({ status:"done" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+};
 
 apicontroller.register = async (req, res) => {
     try {
@@ -909,6 +920,7 @@ apicontroller.user_listing = async (req, res) => {
                 user.lastname = capitalizeFirstLetter(user.lastname.trim());
             }
         });
+        console.log(Useradd, 'Useradd');
         res.status(200).json(Useradd)
 
     } catch (error) {
@@ -3374,8 +3386,9 @@ apicontroller.webhook = async (req, res) => {
     }
 
 
-
-
 }
+
+
+
 
 module.exports = apicontroller;

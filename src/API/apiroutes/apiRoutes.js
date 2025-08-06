@@ -177,6 +177,7 @@ apirouter.get('/templateListing', user.templateListing);
 apirouter.delete('/deleteBusiness/:id', user.deleteBusiness);
 apirouter.delete('/cancelSubscription/:id', user.cancelSubscription);
 apirouter.post('/businessOrder/:id', user.businessOrder);
+apirouter.get('/updateAll', user.updateAll);
 
 // apirouter.get('/')
 

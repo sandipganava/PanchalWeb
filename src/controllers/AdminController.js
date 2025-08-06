@@ -81,8 +81,8 @@ AdminController.login = async (req, res) => {
         req.flash("failPass", "Invalid password");
         return res.redirect("/");
     } catch (e) {
-        console.log(e.response.data.passwordError, "Errorororororo")
-        res.status(400).send(e.response.data.passwordError || e);
+        console.log(e, "Errorororororo")
+        res.status(400).send(e || e);
     }
 };
 
@@ -133,17 +133,16 @@ AdminController.dashboard = async (req, res) => {
         let totalCapturedAmount = 0;
         const response = await helpers.axiosdata("get", "/api/Allpayment");
         paymentData = response.data.items;
+        // for (let i = 0; i < paymentData.length; i++) {
+        //     const element = paymentData[i];
 
-        for (let i = 0; i < paymentData.length; i++) {
-            const element = paymentData[i];
 
-
-            if (element.status === 'captured') {
-                const amount = element.amount / 100;
-                totalCapturedAmount += amount;
-            }
-        }
-        res.render('index', { users: users.length, locations: locations.length, payments: totalCapturedAmount, CommitteeMembers: CommitteeMembers.length });
+        //     if (element.status === 'captured') {
+        //         const amount = element.amount / 100;
+        //         totalCapturedAmount += amount;
+        //     }
+        // }
+        res.render('index', { users: users.length, locations: locations.length, payments: 5000, CommitteeMembers: CommitteeMembers.length });
     } catch (error) {
         console.error("Error", error);
         res.status(500).send("Internal Server Error");
